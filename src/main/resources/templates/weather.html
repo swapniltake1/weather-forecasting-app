@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Page</title>
+</head>
+<body>
+     <div>
+        <form th:action="@{/ui/your-location}" method="get">
+            <label for="lat">Latitude:</label><br>
+            <input type="text" id="lat" name="lat" placeholder="Enter latitude..."><br>
+            <label for="lon">Longitude:</label><br>
+            <input type="text" id="lon" name="lon" placeholder="Enter longitude..."><br>
+            <button type="submit">Search Weather</button>
+        </form>
+    </div>
+    <div>
+        <form action="/searchOption2" method="post">
+            <label for="searchByOption2">Search Option 2:</label><br>
+            <input type="text" id="inputOption2" name="inputOption2" placeholder="Enter input for Option 2..."><br>
+            <button type="submit">Search Option 2</button>
+        </form>
+    </div>
+
+</body>
+</html>

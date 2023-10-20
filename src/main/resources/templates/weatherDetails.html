@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Details</title>
+</head>
+<body>
+    <h2>Weather Details</h2>
+    <div>
+        <table border="1">
+            <tr th:each="entry : ${weatherResponse.entrySet()}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
