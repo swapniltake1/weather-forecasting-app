@@ -3,24 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Page</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgb(255, 128, 64);
+            padding: 20px;
+        }
+        .main-content {
+            margin-top: 50px;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        form label {
+            font-weight: bold;
+        }
+        form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff; /* Set your desired button color here */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3; /* Set your desired hover button color here */
+        }
+    </style>
 </head>
 <body>
-     <div>
-        <form th:action="@{/ui/your-location}" method="get">
-            <label for="lat">Latitude:</label><br>
-            <input type="text" id="lat" name="lat" placeholder="Enter latitude..."><br>
-            <label for="lon">Longitude:</label><br>
-            <input type="text" id="lon" name="lon" placeholder="Enter longitude..."><br>
-            <button type="submit">Search Weather</button>
-        </form>
+    <div class="container text-center">
+        <h1>Welcome to the Weather App</h1>
     </div>
-    <div>
-        <form action="/searchOption2" method="post">
-            <label for="searchByOption2">Search Option 2:</label><br>
-            <input type="text" id="inputOption2" name="inputOption2" placeholder="Enter input for Option 2..."><br>
-            <button type="submit">Search Option 2</button>
-        </form>
+    <div class="container main-content">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form th:action="@{/ui/your-location}" method="get">
+					<h4>Search with your Location</h4>
+                    <label for="lat">Latitude:</label><br>
+                    <input type="text" class="form-control" id="lat" name="lat" placeholder="Enter latitude..."><br>
+                    <label for="lon">Longitude:</label><br>
+                    <input type="text" class="form-control" id="lon" name="lon" placeholder="Enter longitude..."><br>
+                    <button type="submit" class="btn btn-primary">Search Weather</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3">
+                <form th:action="@{/ui/zipcode}" method="get">
+					<h4>Search with your Zipcode</h4>
+                    <label for="searchByOption2">Zipcode:</label><br>
+                    <input type="text" class="form-control" id="zipCode" name="zipCode" placeholder="Enter Zipcode..."><br>
+                    <button type="submit" class="btn btn-primary">Search Weather</button>
+                </form>
+            </div>
+        </div>
     </div>
 
+  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

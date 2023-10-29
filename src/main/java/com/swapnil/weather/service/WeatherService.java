@@ -32,8 +32,9 @@ public class WeatherService {
         return getWeatherResponse(url);
     }
 
-    public WeatherResponse getCurrentWeatherByZipCode(String zipCode, String countryCode) {
-        String url = apiUrl+"?zip=" + zipCode + "," + countryCode + "&appid=" + API_KEY;
+    public WeatherResponse getCurrentWeatherByZipCode(Integer zipCode) {
+        String countryCode = "IN"; 
+        String url = apiUrl + "?zip=" + zipCode + "," + countryCode + "&appid=" + API_KEY;
         return getWeatherResponse(url);
     }
 
@@ -66,4 +67,5 @@ public class WeatherService {
             return null;
         }
     }
+
 }

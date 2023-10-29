@@ -3,16 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather Details</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+           
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        
+        body.weather-cloudy {
+            background-color: #b0c4de;
+        }
+        
+        body.weather-rainy {
+            background-color: #708090;
+        }
+        table {
+            margin: 0 auto;
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f9f9f9; 
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
-<body>
-    <h2>Weather Details</h2>
-    <div>
-        <table border="1">
-            <tr th:each="entry : ${weatherResponse.entrySet()}">
-                <td th:text="${entry.key}"></td>
-                <td th:text="${entry.value}"></td>
-            </tr>
-        </table>
+<body th:classappend="'weather-' + ${weatherResponse.weatherCondition}">
+    <div class="container">
+        <h2 class="text-center">Weather Details</h2>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                <tr th:each="property : ${#strings.listSplit('coord,weather,base,main,visibility,wind,rain,clouds,dt,sys,timezone,id,name,cod', ',')}">
+                    <td th:text="${property}"></td>
+                    <td th:text="${#strings.isEmpty(weatherResponse[property]) ? '' : weatherResponse[property]}"></td>
+                </tr>
+            </table>
+        </div>
     </div>
+
+    <footer>
+        <p>Created by Swapnil Take</p>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

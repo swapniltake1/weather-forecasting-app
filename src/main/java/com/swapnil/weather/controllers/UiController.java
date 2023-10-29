@@ -1,5 +1,7 @@
 package com.swapnil.weather.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.swapnil.weather.res.Weather;
 import com.swapnil.weather.res.WeatherResponse;
 import com.swapnil.weather.service.OtpService;
 import com.swapnil.weather.service.WeatherService;
@@ -31,15 +35,14 @@ public class UiController {
 	
 	@PostMapping("/login")
     public String login(@RequestParam String name, @RequestParam String phone, Model model) {
-        // Your logic to validate name and phone
-        // Generate OTP and store it in generatedOTP
+       
 		generatedOTP = otpService.generateOTP();
        
 
-        // For demonstration purposes, let's print the OTP in the console
+        
         System.out.println("Generated OTP: " + generatedOTP);
 
-        // Pass the generatedOTP to the next view
+        
         model.addAttribute("name", name);
         model.addAttribute("phone", phone);
         return "verifyOTP";
@@ -66,14 +69,30 @@ public class UiController {
 	@GetMapping("/your-location")
 	public String getWeather(Model model, @RequestParam double lat, @RequestParam double lon) {
 	    WeatherResponse weatherResponse = weatherService.getCurrentWeather(lat, lon);
-
+         
 	    if (weatherResponse != null) {
 	        model.addAttribute("weatherResponse", weatherResponse);
-	        return "weatherDetails"; // Replace with the name of your Thymeleaf template file
+	        return "weatherDetails"; 
 	    } else {
-	        // Handle the case where the weather response is null
-	        return "error-template"; // Replace with the name of your error template file
+	        
+	        return "error-template"; 
 	    }
+	}
+	
+	@GetMapping("/zipcode")
+	public String getWeatherDataByZipCode(@RequestParam Integer zipCode, Model model) {
+		
+		WeatherResponse currentWeatherByZipCode = weatherService.getCurrentWeatherByZipCode(zipCode);
+		
+		if (currentWeatherByZipCode != null) {
+	        model.addAttribute("weatherResponse", currentWeatherByZipCode);
+	        return "weatherDetails";
+	        
+	    } else {
+	        
+	        return "error-template"; 
+	    }
+		
 	}
 
 	

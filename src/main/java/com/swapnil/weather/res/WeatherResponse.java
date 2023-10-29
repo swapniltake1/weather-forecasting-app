@@ -2,6 +2,7 @@ package com.swapnil.weather.res;
 
 import java.util.List;
 
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,20 @@ public class WeatherResponse {
     private long id;
     private String name;
     private int cod;
+    private String weatherCondition;
+    
+    
+    @PostConstruct
+    public void init() {
+        setWeatherConditionFromMain();
+    }
+
+    public void setWeatherConditionFromMain() {
+        if (this.weather != null && !this.weather.isEmpty()) {
+            this.weatherCondition = this.weather.get(0).getMain();
+        }
+    }
+    
+    
+    
 }
